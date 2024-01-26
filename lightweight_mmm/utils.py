@@ -26,7 +26,6 @@ from scipy import interpolate
 from scipy import optimize
 from scipy import spatial
 from scipy import stats
-from tensorflow.io import gfile
 
 from lightweight_mmm import media_transforms
 
@@ -41,7 +40,7 @@ def save_model(
     media_mix_model: Model to save on disk.
     file_path: File path where the model should be placed.
   """
-  with gfile.GFile(file_path, "wb") as file:
+  with open(file_path, "wb") as file:
     pickle.dump(obj=media_mix_model, file=file)
 
 
@@ -54,7 +53,7 @@ def load_model(file_path: str) -> Any:
   Returns:
     The LightweightMMM object that was stored in the given path.
   """
-  with gfile.GFile(file_path, "rb") as file:
+  with open(file_path, "rb") as file:
     media_mix_model = pickle.load(file=file)
 
   for attr in dir(media_mix_model):
